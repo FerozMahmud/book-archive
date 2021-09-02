@@ -1,14 +1,11 @@
 const searchBook = () => {
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
-    // console.log(searchText);
 
     // Clear Data
     searchField.value = '';
 
     const url = `https://openlibrary.org/search.json?q=${searchText}`
-
-    // console.log(url);
     fetch(url)
         .then(res => res.json())
         .then(data => displaySearchResult(data.docs));
@@ -16,15 +13,17 @@ const searchBook = () => {
 
 const displaySearchResult = books => {
     const searchResult = document.getElementById('search-result');
-    searchResult.innerHTML = '';
+    searchResult.innerHTML = ''
+
+    // Error Search Result Found
     if (books.length === 0) {
         const h4 = document.createElement('h4');
         h4.classList.add('text-danger');
         h4.innerHTML = `No Result Found`;
         searchResult.appendChild(h4);
     }
+    // Search Result Append in a Div
     books.forEach(book => {
-        // console.log('book')
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `
